@@ -64,6 +64,7 @@ export default {
         return name !== randomStaff;
       });
       this.checkedStaff = filteredStaff;
+      this.playTheme(randomStaff);
     },
     staffImg(staffName) {
       return `/images/${staffName}.jpg`;
@@ -71,6 +72,10 @@ export default {
     restart() {
       this.checkedStaff = this.allStaff;
       this.currentStaff = "";
+    },
+    playTheme(staffName) {
+      let sound = new Audio(`/sounds/${staffName}.mp3`);
+      sound.play();
     },
   },
 };
