@@ -35,7 +35,7 @@
         </div>
       </div>
       <div v-else-if="!checkedStaff.length" class="container">
-        <p>Any annoucements?</p>
+        <p>Any announcements?</p>
         <button @click="restart">Go again (reset)</button>
       </div>
     </div>
