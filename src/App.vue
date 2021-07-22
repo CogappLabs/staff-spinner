@@ -11,26 +11,36 @@
           :id="staff"
           :name="staff"
           :value="staff"
-        />{{ staff }}</label
+        />{{ staff.name }}</label
       >
     </fieldset>
     <div>
       <div class="container" v-if="checkedStaff.length">
         <h2>Spin2win</h2>
-        <button @click="pickStaff">Next up</button>
+        <button @click="allFlash">Next up</button>
       </div>
-      <div v-if="currentStaff" class="container">
+      <div v-if="currentStaff.name != ''" class="container">
         <p>
-          You're up <em>{{ currentStaff }}</em>
+          You're up <em>{{ currentStaff.name }}</em>
         </p>
-        <img class="lone-img" :src="staffImg(currentStaff)" />
+        <img class="lone-img" :src="staffImg(currentStaff.name)" />
       </div>
       <div class="container" v-if="checkedStaff.length">
         <h2>Remaining staff</h2>
         <div class="grid-wrapper">
-          <div v-for="(staff, index) in checkedStaff" v-bind:key="index">
-            <img class="grid-img" :src="staffImg(staff)" />
-            {{ staff }}
+          <div
+            v-for="(staff, index) in checkedStaff"
+            v-bind:key="index"
+            class="grid-img-wrapper"
+          >
+            <img
+              class="grid-img"
+              :class="{ 'grid-img-animate': staff.flash }"
+              :id="index"
+              :ref="index"
+              :src="staffImg(staff.name)"
+            />
+            <div class="grid-img-name">{{ staff.name }}</div>
           </div>
         </div>
       </div>
@@ -42,56 +52,101 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 import { config } from "@/config";
 
-export default {
-  name: "App",
-  components: {},
-  data: function () {
-    return {
-      allStaff: config.staff,
-      checkedStaff: config.staff,
-      currentStaff: "",
-    };
-  },
-  methods: {
-    pickStaff() {
-      let randomStaff =
-        this.checkedStaff[Math.floor(Math.random() * this.checkedStaff.length)];
-      this.currentStaff = randomStaff;
-      let filteredStaff = this.checkedStaff.filter(function (name) {
-        return name !== randomStaff;
-      });
-      this.checkedStaff = filteredStaff;
-      this.playTheme(randomStaff);
-    },
-    staffImg(staffName) {
-      return `/images/${staffName}.jpg`;
-    },
-    restart() {
-      this.checkedStaff = this.allStaff;
-      this.currentStaff = "";
-    },
-    playTheme(staffName) {
-      let sound = new Audio(`/sounds/${staffName}.mp3`);
-      sound.play();
-    },
-  },
-};
+interface Staff {
+  name: string;
+  flash: boolean;
+}
+
+@Component
+export default class App extends Vue {
+  allStaff: Array<Staff> = config.staff;
+  checkedStaff: Array<Staff> = config.staff;
+  blankStaff = { name: "", flash: false };
+  currentStaff: Staff = this.blankStaff;
+
+  pickStaff(): void {
+    let randomStaff: Staff =
+      this.checkedStaff[Math.floor(Math.random() * this.checkedStaff.length)];
+    this.currentStaff = randomStaff;
+    let filteredStaff: Array<Staff> = this.checkedStaff.filter(function (name) {
+      return name !== randomStaff;
+    });
+    this.checkedStaff = filteredStaff;
+    this.playTheme(randomStaff);
+  }
+  staffImg(staffName: string): string {
+    return `/images/${staffName}.jpg`;
+  }
+  restart(): void {
+    this.checkedStaff = this.allStaff;
+    this.currentStaff = this.blankStaff;
+  }
+  playTheme(staffName: Staff): void {
+    let sound = new Audio(`/sounds/${staffName.name}.mp3`);
+    sound.play();
+  }
+  allFlash(): void {
+    this.checkedStaff.forEach(
+      (staffMember: Staff, idx: number, array: Array<Staff>) => {
+        setTimeout(() => {
+          staffMember.flash = true;
+          if (idx === array.length - 1) {
+            setTimeout(() => {
+              this.removeFlashClass();
+              this.pickStaff();
+            }, 2000);
+          }
+        }, idx * 1000);
+      }
+    );
+  }
+  removeFlashClass(): void {
+    this.checkedStaff.forEach((staffMember: Staff) => {
+      staffMember.flash = false;
+    });
+  }
+}
 </script>
 
-<style>
+<style scoped>
 .grid-wrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 30vw);
   grid-gap: 15px;
 }
+.grid-img-wrapper {
+  background-color: black;
+}
+
 .grid-img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.grid-img-animate {
+  animation: grid-image 1s 2;
+  animation-direction: alternate;
+}
+
+.grid-img-name {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+@keyframes grid-image {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
 }
 .lone-img {
   height: 300px;
@@ -102,5 +157,11 @@ export default {
 }
 em {
   font-weight: bold;
+}
+.animate {
+  width: 100px;
+  height: 100px;
+  border: 1px solid;
+  border-color: red;
 }
 </style>
