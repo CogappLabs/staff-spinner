@@ -94,6 +94,7 @@ export default class App extends Vue {
   }
   allFlash(): void {
     this.scrollToStaff();
+    this.bgSound.loop = true;
     this.bgSound.play();
     this.checkedStaff.forEach(
       (staffMember: Staff, idx: number, array: Staff[]) => {
