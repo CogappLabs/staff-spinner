@@ -67,6 +67,7 @@ export default class App extends Vue {
   blankStaff = { name: "", flash: false, image: "" };
   currentStaff: Staff = this.blankStaff;
   apiLoading = true;
+  bgSound = new Audio("/sounds/bg.mp3");
 
   mounted(): void {
     this.getStaff();
@@ -88,11 +89,12 @@ export default class App extends Vue {
     this.currentStaff = this.blankStaff;
   }
   playTheme(staffName: Staff): void {
-    let sound = new Audio(`sounds/${staffName.sound}`);
+    let sound = new Audio(`/sounds/${staffName.sound}`);
     sound.play();
   }
   allFlash(): void {
     this.scrollToStaff();
+    this.bgSound.play();
     this.checkedStaff.forEach(
       (staffMember: Staff, idx: number, array: Staff[]) => {
         setTimeout(() => {
@@ -100,6 +102,7 @@ export default class App extends Vue {
           if (idx === array.length - 1) {
             setTimeout(() => {
               this.removeFlashClass();
+              this.bgSound.pause();
               this.pickStaff();
             }, 200);
           }
