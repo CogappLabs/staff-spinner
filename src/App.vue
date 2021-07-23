@@ -164,6 +164,7 @@ button {
   border-radius: 0.12em;
   color: black;
   font-size: 1.5em;
+  cursor: pointer;
 }
 
 button:hover {
