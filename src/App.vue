@@ -101,7 +101,7 @@ export default class App extends Vue {
             setTimeout(() => {
               this.removeFlashClass();
               this.pickStaff();
-            }, 50);
+            }, 200);
           }
         }, idx * 200);
       }
@@ -181,7 +181,7 @@ button:hover {
 }
 
 .grid-img-animate {
-  animation: grid-image 0.05s 2;
+  animation: grid-image 0.1s 2;
   animation-direction: alternate;
 }
 
@@ -195,15 +195,15 @@ button:hover {
     opacity: 1;
   }
   100% {
-    opacity: 0.5;
+    opacity: 0;
   }
 }
 .lone-img {
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
-  filter: contrast(5);
-  /* filter: saturate(5); */
+  filter: saturate(10);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .container {
   padding-top: 15px;
