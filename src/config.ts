@@ -1,6 +1,6 @@
 const config = {
   useGraphQL: true,
-  graphQLAPI: "http://localhost:4000/graphql",
+  graphQLAPI: "https://staffql.herokuapp.com/graphql",
   staff: [
     { name: "Luke", flash: false, image: "" },
     { name: "Jodie", flash: false, image: "" },
