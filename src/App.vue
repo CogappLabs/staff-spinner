@@ -25,7 +25,11 @@
         <p>
           You're up <em>{{ currentStaff.name }}</em>
         </p>
-        <img class="lone-img" :src="currentStaff.image" />
+        <img
+          @click="playTheme(currentStaff)"
+          class="lone-img"
+          :src="currentStaff.image"
+        />
       </div>
       <div class="container" v-if="checkedStaff.length">
         <h2 ref="staff">Remaining staff</h2>
@@ -47,7 +51,7 @@
         </div>
       </div>
       <div v-else-if="!checkedStaff.length" class="container">
-        <p>Any announcements?</p>
+        <button @click="playAnnouncements">Any announcements?</button>
         <button @click="restart">Go again (reset)</button>
       </div>
     </div>
@@ -68,6 +72,7 @@ export default class App extends Vue {
   currentStaff: Staff = this.blankStaff;
   apiLoading = true;
   bgSound = new Audio("/sounds/bg.mp3");
+  announcementsSound = new Audio("/sounds/announcements.mp3");
 
   mounted(): void {
     this.getStaff();
@@ -90,6 +95,7 @@ export default class App extends Vue {
   }
   playTheme(staffName: Staff): void {
     let sound = new Audio(`/sounds/${staffName.sound}`);
+    sound.volume = 1;
     sound.play();
   }
   allFlash(): void {
@@ -138,6 +144,9 @@ export default class App extends Vue {
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
+  }
+  playAnnouncements(): void {
+    this.announcementsSound.play();
   }
 }
 </script>
@@ -207,7 +216,7 @@ button:hover {
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
-  filter: saturate(10);
+  filter: grayscale(100%);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .container {
