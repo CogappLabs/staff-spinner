@@ -52,6 +52,7 @@
       </div>
       <div v-else-if="!checkedStaff.length" class="container">
         <button @click="playAnnouncements">Any announcements?</button>
+        <button @click="bgSound.play()">Goodbye</button>
         <button @click="restart">Go again (reset)</button>
       </div>
     </div>
@@ -92,6 +93,7 @@ export default class App extends Vue {
   restart(): void {
     this.checkedStaff = this.allStaff;
     this.currentStaff = this.blankStaff;
+    this.bgSound.pause();
   }
   playTheme(staffName: Staff): void {
     let sound = new Audio(`/sounds/${staffName.sound}`);
