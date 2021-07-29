@@ -32,7 +32,7 @@
         />
       </div>
       <div class="container" v-if="checkedStaff.length">
-        <h2 ref="staff">Remaining staff</h2>
+        <h2 ref="staff">Humans2go</h2>
         <div class="grid-wrapper">
           <div
             v-for="(staff, index) in checkedStaff"
