@@ -52,7 +52,7 @@
       </div>
       <div v-else-if="!checkedStaff.length" class="container">
         <button @click="playAnnouncements">Any announcements?</button>
-        <button @click="bgSound.play()">Goodbye</button>
+        <button @click="slackBgSound.pause()">Stop audio</button>
         <button @click="restart">Go again (reset)</button>
       </div>
     </div>
@@ -74,6 +74,7 @@ export default class App extends Vue {
   apiLoading = true;
   bgSound = new Audio("/sounds/bg.mp3");
   announcementsSound = new Audio("/sounds/announcements.mp3");
+  slackBgSound = new Audio("/sounds/slackbg.mp3");
 
   mounted(): void {
     this.getStaff();
@@ -149,6 +150,7 @@ export default class App extends Vue {
   }
   playAnnouncements(): void {
     this.announcementsSound.play();
+    this.slackBgSound.play();
   }
 }
 </script>
