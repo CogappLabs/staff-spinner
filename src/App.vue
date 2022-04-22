@@ -54,13 +54,11 @@
         <button @click="playAnnouncements">Any announcements?</button>
         <button @click="slackBgSound.pause()">Stop audio</button>
         <button @click="restart">Go again (reset)</button>
-        <p v-if="isTodayFriday">
-          Friday is a special day... Please do your TRS
-        </p>
+        <p v-if="isTodayFriday">Friday is a special day… Please do your TRS</p>
       </div>
     </div>
   </div>
-  <div v-else>Reticulating splines...</div>
+  <div v-else>Reticulating splines…</div>
 </template>
 
 <script lang="ts">
