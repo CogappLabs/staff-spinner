@@ -54,6 +54,9 @@
         <button @click="playAnnouncements">Any announcements?</button>
         <button @click="slackBgSound.pause()">Stop audio</button>
         <button @click="restart">Go again (reset)</button>
+        <p v-if="isTodayFriday">
+          Friday is a special day... Please do your TRS
+        </p>
       </div>
     </div>
   </div>
@@ -78,6 +81,12 @@ export default class App extends Vue {
 
   mounted(): void {
     this.getStaff();
+  }
+
+  get isTodayFriday(): boolean {
+    const today = new Date();
+    const day = today.getDay();
+    return day === 5;
   }
 
   pickStaff(): void {
