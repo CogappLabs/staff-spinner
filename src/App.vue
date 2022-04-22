@@ -54,7 +54,13 @@
         <button @click="playAnnouncements">Any announcements?</button>
         <button @click="slackBgSound.pause()">Stop audio</button>
         <button @click="restart">Go again (reset)</button>
-        <p v-if="isTodayFriday">Friday is a special day… Please do your TRS</p>
+        <p v-if="isTodayFriday">
+          Friday is a special day… Please do your TRS
+          <span class="trs-days">X</span>&nbsp;<span class="trs-days">X</span
+          >&nbsp;<span class="trs-days">X</span>&nbsp;<span class="trs-days"
+            >X</span
+          >&nbsp;<span class="trs-days">today</span>
+        </p>
       </div>
     </div>
   </div>
@@ -203,6 +209,14 @@ button:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.trs-days {
+  color: #ff0000;
+  text-decoration: underline;
+  font-weight: bold;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt;
 }
 
 .grid-img-animate {
