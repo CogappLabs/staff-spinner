@@ -316,6 +316,7 @@ em {
   background-color: #000;
   color: #ffe81f;
   accent-color: white;
+  background-image: url('/images/star-wars-stars.jpg');
 }
 
 .starwars > h1 {
