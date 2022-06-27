@@ -1,9 +1,14 @@
 <template>
-  <div v-if="!apiLoading" class="site-wrapper">
+  <div
+    v-if="!apiLoading"
+    class="site-wrapper"
+    :class="{ starwars: isTodayStarWarsDay }"
+  >
     <h1>Staff spinner</h1>
     <div class="fieldset-container">
       <fieldset>
-        <legend>Who is in today?</legend>
+        <legend v-if="!isTodayStarWarsDay">Who is in today?</legend>
+        <legend v-else>Who are the droids we're looking for?</legend>
 
         <label v-for="(staff, index) in allStaff" v-bind:key="index"
           ><input
@@ -22,8 +27,12 @@
         <button @click="allFlash">Next up</button>
       </div>
       <div v-if="currentStaff.name != ''" class="container">
-        <p>
+        <p v-if="!isTodayStarWarsDay">
           You're up <em>{{ currentStaff.name }}</em>
+        </p>
+        <p v-else>
+          Help me, <em>{{ currentStaff.name }}</em
+          >. You’re my only hope.
         </p>
         <img
           @click="playTheme(currentStaff)"
@@ -32,7 +41,8 @@
         />
       </div>
       <div class="container" v-if="checkedStaff.length">
-        <h2 ref="staff">Humans2go</h2>
+        <h2 ref="staff" v-if="!isTodayStarWarsDay">Humans2go</h2>
+        <h2 v-else>Jedi Scum</h2>
         <div class="grid-wrapper">
           <div
             v-for="(staff, index) in checkedStaff"
@@ -68,21 +78,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import fetchStaffAPI from "@/api";
-import { Staff } from "@/interfaces";
+import { Component, Vue } from 'vue-property-decorator';
+import fetchStaffAPI from '@/api';
+import { Staff } from '@/interfaces';
 
 @Component
 export default class App extends Vue {
   allStaff = {} as Staff[];
   checkedStaff = {} as Staff[];
-  blankStaff = { name: "", flash: false, image: "" };
+  blankStaff = { name: '', flash: false, image: '' };
   currentStaff: Staff = this.blankStaff;
   apiLoading = true;
-  bgSound = new Audio("/sounds/bg.mp3");
-  announcementsSound = new Audio("/sounds/announcements.mp3");
-  slackBgSound = new Audio("/sounds/slackbg.mp3");
+  announcementsSound = new Audio('/sounds/announcements.mp3');
 
+  get bgSound(): HTMLAudioElement {
+    if (this.isTodayStarWarsDay) {
+      return new Audio('/sounds/cantina.mp3');
+    }
+    return new Audio('/sounds/bg.mp3');
+  }
+
+  get slackBgSound(): HTMLAudioElement {
+    if (this.isTodayStarWarsDay) {
+      return new Audio('/sounds/starwars-theme.mp3');
+    }
+    return new Audio('/sounds/slackbg.mp3');
+  }
   mounted(): void {
     this.getStaff();
   }
@@ -91,6 +112,11 @@ export default class App extends Vue {
     const today = new Date();
     const day = today.getDay();
     return day === 5;
+  }
+
+  get isTodayStarWarsDay(): boolean {
+    const today = new Date();
+    return today.getMonth() === 4 && today.getDate() === 4;
   }
 
   pickStaff(): void {
@@ -146,19 +172,19 @@ export default class App extends Vue {
     });
   }
   randomColor(): string {
-    let randomColour = "#" + ((Math.random() * 0xffffff) << 0).toString(16);
+    let randomColour = '#' + ((Math.random() * 0xffffff) << 0).toString(16);
     return randomColour;
   }
   scrollToStaff(): void {
     const el = this.$refs.staff as HTMLElement;
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   }
   scrollToSelectedStaff(): void {
     const el = this.$refs.selectedStaff as HTMLElement;
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   }
   playAnnouncements(): void {
@@ -170,8 +196,10 @@ export default class App extends Vue {
 
 <style scoped>
 .site-wrapper {
-  font-family: "MajorMonoDisplay";
+  font-family: 'MajorMonoDisplay';
+  padding: 1rem;
 }
+
 label {
   font-family: monospace;
   /* padding-right: 1em; */
@@ -257,12 +285,49 @@ em {
   border-color: red;
 }
 @font-face {
-  font-family: "MajorMonoDisplay";
+  font-family: 'MajorMonoDisplay';
   font-weight: 400;
   font-style: normal;
   font-display: auto;
   unicode-range: U+000-5FF;
-  src: local("MajorMonoDisplay"),
-    url("/fonts/MajorMonoDisplay-Regular.ttf") format("truetype");
+  src: local('MajorMonoDisplay'),
+    url('/fonts/MajorMonoDisplay-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'star jedi';
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: url('/fonts/star_jedi/starjedi/Starjedi.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'star jedi outline';
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: url('/fonts/star_jedi/starjedi/Starjhol.ttf') format('truetype');
+}
+
+.starwars {
+  font-family: 'star jedi';
+  letter-spacing: 0.1rem;
+  background-color: #000;
+  color: #ffe81f;
+  accent-color: white;
+  background-image: url('/images/star-wars-stars.jpg');
+}
+
+.starwars > h1 {
+  margin-top: 0;
+  font-family: 'star jedi outline';
+  font-size: 4rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.starwars .grid-img-name {
+  text-shadow: 0px 0px 4px black;
 }
 </style>
