@@ -78,31 +78,31 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import fetchStaffAPI from '@/api';
-import { Staff } from '@/interfaces';
+import { Component, Vue } from "vue-property-decorator";
+import fetchStaffAPI from "@/api";
+import { Staff } from "@/interfaces";
 
 @Component
 export default class App extends Vue {
   allStaff = {} as Staff[];
   checkedStaff = {} as Staff[];
-  blankStaff = { name: '', flash: false, image: '' };
+  blankStaff = { name: "", flash: false, image: "" };
   currentStaff: Staff = this.blankStaff;
   apiLoading = true;
-  announcementsSound = new Audio('/sounds/announcements.mp3');
+  announcementsSound = new Audio("/sounds/announcements.mp3");
 
   get bgSound(): HTMLAudioElement {
     if (this.isTodayStarWarsDay) {
-      return new Audio('/sounds/cantina.mp3');
+      return new Audio("/sounds/cantina.mp3");
     }
-    return new Audio('/sounds/bg.mp3');
+    return new Audio("/sounds/bg.mp3");
   }
 
   get slackBgSound(): HTMLAudioElement {
     if (this.isTodayStarWarsDay) {
-      return new Audio('/sounds/starwars-theme.mp3');
+      return new Audio("/sounds/starwars-theme.mp3");
     }
-    return new Audio('/sounds/slackbg.mp3');
+    return new Audio("/sounds/slackbg.mp3");
   }
   mounted(): void {
     this.getStaff();
@@ -172,19 +172,19 @@ export default class App extends Vue {
     });
   }
   randomColor(): string {
-    let randomColour = '#' + ((Math.random() * 0xffffff) << 0).toString(16);
+    let randomColour = "#" + ((Math.random() * 0xffffff) << 0).toString(16);
     return randomColour;
   }
   scrollToStaff(): void {
     const el = this.$refs.staff as HTMLElement;
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: "smooth" });
     }
   }
   scrollToSelectedStaff(): void {
     const el = this.$refs.selectedStaff as HTMLElement;
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: "smooth" });
     }
   }
   playAnnouncements(): void {
@@ -196,7 +196,7 @@ export default class App extends Vue {
 
 <style scoped>
 .site-wrapper {
-  font-family: 'MajorMonoDisplay';
+  font-family: "MajorMonoDisplay";
   padding: 1rem;
 }
 
@@ -285,43 +285,43 @@ em {
   border-color: red;
 }
 @font-face {
-  font-family: 'MajorMonoDisplay';
+  font-family: "MajorMonoDisplay";
   font-weight: 400;
   font-style: normal;
   font-display: auto;
   unicode-range: U+000-5FF;
-  src: local('MajorMonoDisplay'),
-    url('/fonts/MajorMonoDisplay-Regular.ttf') format('truetype');
+  src: local("MajorMonoDisplay"),
+    url("fonts/MajorMonoDisplay-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'star jedi';
+  font-family: "star jedi";
   font-weight: 400;
   font-style: normal;
   font-display: auto;
-  src: url('/fonts/star_jedi/starjedi/Starjedi.ttf') format('truetype');
+  src: url("fonts/star_jedi/starjedi/Starjedi.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'star jedi outline';
+  font-family: "star jedi outline";
   font-weight: 400;
   font-style: normal;
   font-display: auto;
-  src: url('/fonts/star_jedi/starjedi/Starjhol.ttf') format('truetype');
+  src: url("fonts/star_jedi/starjedi/Starjhol.ttf") format("truetype");
 }
 
 .starwars {
-  font-family: 'star jedi';
+  font-family: "star jedi";
   letter-spacing: 0.1rem;
   background-color: #000;
   color: #ffe81f;
   accent-color: white;
-  background-image: url('/images/star-wars-stars.jpg');
+  background-image: url("assets/star-wars-stars.jpg");
 }
 
 .starwars > h1 {
   margin-top: 0;
-  font-family: 'star jedi outline';
+  font-family: "star jedi outline";
   font-size: 4rem;
   font-weight: 300;
   text-align: center;
