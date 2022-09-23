@@ -3,6 +3,7 @@ export interface Staff {
   flash: boolean;
   image: string;
   sound?: string;
+  daysWorked: Array<string>;
 }
 
 export interface staffResponse {

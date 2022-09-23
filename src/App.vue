@@ -50,7 +50,9 @@
             class="grid-img-wrapper"
             :style="{ backgroundColor: randomColor() }"
           >
-            <div class="grid-img-name">{{ staff.name }}</div>
+            <div class="grid-img-name">
+              {{ staff.name }}
+            </div>
             <img
               class="grid-img"
               :class="{ 'grid-img-animate': staff.flash }"
@@ -86,7 +88,7 @@ import { Staff } from "@/interfaces";
 export default class App extends Vue {
   allStaff = {} as Staff[];
   checkedStaff = {} as Staff[];
-  blankStaff = { name: "", flash: false, image: "" };
+  blankStaff = { name: "", flash: false, image: "", daysWorked: [] };
   currentStaff: Staff = this.blankStaff;
   apiLoading = true;
   announcementsSound = new Audio("/sounds/announcements.mp3");
@@ -107,11 +109,13 @@ export default class App extends Vue {
   mounted(): void {
     this.getStaff();
   }
+  get dayString(): string {
+    let current = new Date();
+    return current.toLocaleDateString("en-GB", { weekday: "long" });
+  }
 
   get isTodayFriday(): boolean {
-    const today = new Date();
-    const day = today.getDay();
-    return day === 5;
+    return this.dayString === "Friday";
   }
 
   get isTodayStarWarsDay(): boolean {
@@ -167,7 +171,10 @@ export default class App extends Vue {
   getStaff(): void {
     fetchStaffAPI.fetchStaff().then((response) => {
       this.allStaff = response;
-      this.checkedStaff = response;
+      // this.checkedStaff = response;
+      this.checkedStaff = response.filter((staffMember) =>
+        staffMember.daysWorked.includes(this.dayString)
+      );
       this.apiLoading = false;
     });
   }
