@@ -1,0 +1,132 @@
+{
+  "data": {
+    "staff": [
+      {
+        "name": "Andy",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1602170749820-OGYKNEV4EXI95Q1FMLDE/AndyCummins.jpg?format=500w",
+        "sound": "Andy.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Alex",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1488815272617-79VM1AF6S11NB7H85GL7/image-asset.jpeg?format=500w",
+        "sound": "Alex.mp3",
+        "daysWorked": ["Monday"]
+      },
+      {
+        "name": "Ben",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521128137044-DOCW62GKT5OFS4ZBNR0Y/ben-small-1.jpg?format=500w",
+        "sound": "Ben.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Emily",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1591020543497-BBTKJDIQKCKNDCV782CM/emily3edit.jpg?format=500w",
+        "sound": "Emily.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Grant",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521125495521-MUEUA0WH2KLZL0DLD895/grant-small-2.jpg?format=500w",
+        "sound": "Grant.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday"]
+      },
+      {
+        "name": "Hannah",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/9e91d44b-fd6a-4a18-8e6e-8f35ea8e1e3d/HannahB.jpg?format=500w",
+        "sound": "Hannah.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Iain",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1610975738054-XPGU8306ZJKLPVFTPGZI/me.jpg?format=500w",
+        "sound": "Iain.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "James",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1560775570386-VOFV4X5XF4P6Y3SQU2J1/Image+from+iOS+%281%29.jpg?format=500w",
+        "sound": "James.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Jon",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521818417633-0ESQX8911EEHZEJ50D41/ca-1.jpg?format=500w",
+        "sound": "Jon.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Louise",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521125388530-VNB49I3KYGML5U82KVRU/louise-small-2.jpg?format=500w",
+        "sound": "Louise.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday"]
+      },
+      {
+        "name": "Luke",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1615915089110-KDK5MVZTW2TPL78A0VHF/lukewd.jpg?format=500w",
+        "sound": "Luke.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Matt",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1591012058042-HRMWKIU1NWNXMURG2SLV/IMG_0399.jpg?format=500w",
+        "sound": "Matt.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Neil",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521818512674-LSF0MJGLL5DA28CEGW7R/ca-7.jpg?format=500w",
+        "sound": "Neil.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Nick",
+        "flash": false,
+        "image": "https://media-exp1.licdn.com/dms/image/C5603AQGT75oZlgPUgg/profile-displayphoto-shrink_800_800/0/1543845408970?e=1672876800&v=beta&t=6ath14wS5dGY_xDCsvjsK4VzmMKwSrtG3pzpJMtoMug",
+        "sound": "Nick.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Nitin",
+        "flash": false,
+        "image": "https://ca.slack-edge.com/T045774MG-U02KE3ZM5LY-6a3476e26248-512",
+        "sound": "Nitin.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Scout",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1574091028333-SEDTF04PLLH5JBTUXFL4/Image+from+iOS+%282%29.jpg?format=500w",
+        "sound": "Scout.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Steve",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1488815669959-GGX5VVLTXYWH96BARUST/image-asset.png?format=500w",
+        "sound": "Steve.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      },
+      {
+        "name": "Tristan",
+        "flash": false,
+        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1516702449445-HM18UV7Y944SP3WNYA8O/20180117-IMG_7520.jpg?format=500w",
+        "sound": "Tristan.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      }
+    ]
+  }
+}
