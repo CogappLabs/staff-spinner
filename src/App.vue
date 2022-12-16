@@ -96,6 +96,8 @@ export default class App extends Vue {
   get bgSound(): HTMLAudioElement {
     if (this.isTodayStarWarsDay) {
       return new Audio("/sounds/cantina.mp3");
+    } else if (this.isTodayXmasParty) {
+      return new Audio("/sounds/xmas.mp3");
     }
     return new Audio("/sounds/bg.mp3");
   }
@@ -121,6 +123,11 @@ export default class App extends Vue {
   get isTodayStarWarsDay(): boolean {
     const today = new Date();
     return today.getMonth() === 4 && today.getDate() === 4;
+  }
+
+  get isTodayXmasParty(): boolean {
+    const today = new Date();
+    return today.getMonth() === 11 && today.getDate() === 16;
   }
 
   pickStaff(): void {
