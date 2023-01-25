@@ -64,7 +64,7 @@
       </div>
       <div v-else-if="!checkedStaff.length" class="container">
         <button @click="playAnnouncements">Any announcements?</button>
-        <!-- <button @click="slackBgSound.pause()">Stop audio</button> -->
+        <button @click="slackBgSound.pause()">Stop audio</button>
         <button @click="restart">Go again (reset)</button>
         <p v-if="isTodayFriday">
           Friday is a special day… Please do your TRS
@@ -203,7 +203,7 @@ export default class App extends Vue {
   }
   playAnnouncements(): void {
     this.announcementsSound.play();
-    // this.slackBgSound.play();
+    this.slackBgSound.play();
   }
 }
 </script>
