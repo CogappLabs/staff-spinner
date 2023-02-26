@@ -35,7 +35,7 @@
         <h2 v-else>Spin2win</h2>
         <button @click="allFlash">
           <span v-if="isTodayPokemonDay">YES</span>
-          <span v-else>Mext up</span>
+          <span v-else>Next up</span>
         </button>
       </div>
       <div v-if="currentStaff.name != ''" class="container">
@@ -454,6 +454,11 @@ em {
   filter: sepia(1) hue-rotate(40deg);
 }
 
+.pokemon .grid-image {
+  box-shadow: unset;
+}
+
+.pokemon
 .pokemon button {
   appearance: none;
   border: 2px solid currentColor;
