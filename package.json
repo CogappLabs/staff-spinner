@@ -9,11 +9,12 @@
   },
   "engines": {
     "node": "18.x",
-    "npm": "8.x"
+    "npm": "9.x"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "emotion": "^10.0.27",
+    "pokeapi-typescript": "^2.1.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2"
