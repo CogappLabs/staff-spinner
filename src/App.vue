@@ -44,7 +44,9 @@
           >. You’re my only hope.
         </p>
         <p v-else-if="isTodayPokemonDay">
-          Ash sent out <em>{{ currentStaff.name.toUpperCase() }}</em>
+          Ash sent out <em>{{ currentStaffPokemonName.toUpperCase() }}</em> ({{
+            currentStaff.name.toUpperCase()
+          }})
         </p>
         <p v-else>
           You're up <em>{{ currentStaff.name }}</em>
@@ -115,6 +117,7 @@ export default class App extends Vue {
   blankStaff = { name: "", flash: false, image: "", daysWorked: [] };
   currentStaff: Staff = this.blankStaff;
   currentStaffPokemonImage = "";
+  currentStaffPokemonName = "";
   apiLoading = true;
   announcementsSound = new Audio("/sounds/announcements.mp3");
 
@@ -250,9 +253,10 @@ export default class App extends Vue {
       .map((char) => char.charCodeAt(0))
       .reduce((acc, val) => acc + val, 0);
     const randomNumber = Math.floor(Math.abs(Math.sin(seed)) * 151) + 1;
-    PokeAPI.Pokemon.resolve(randomNumber).then(
-      (result) => (this.currentStaffPokemonImage = result.sprites.front_default)
-    );
+    PokeAPI.Pokemon.resolve(randomNumber).then((result) => {
+      this.currentStaffPokemonImage = result.sprites.front_default;
+      this.currentStaffPokemonName = result.name;
+    });
   }
 
   randomColor(): string {
