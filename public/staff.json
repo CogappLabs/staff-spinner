@@ -16,6 +16,13 @@
         "daysWorked": ["Monday"]
       },
       {
+        "name": "Arusha",
+        "flash": false,
+        "image": "https://media.licdn.com/dms/image/C4D03AQGFoHSbh1zT6g/profile-displayphoto-shrink_800_800/0/1517630479125?e=1694649600&v=beta&t=32BFVOnQCK_eQ6EPL494yVdJWfvMndYWKCppPdiz-0g",
+        "sound": "Arusha.mp3",
+        "daysWorked": ["Monday", "Wednesday", "Thursday"]
+      },
+      {
         "name": "Ben",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521128137044-DOCW62GKT5OFS4ZBNR0Y/ben-small-1.jpg?format=500w",
