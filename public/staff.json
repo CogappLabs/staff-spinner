@@ -13,7 +13,7 @@
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1488815272617-79VM1AF6S11NB7H85GL7/image-asset.jpeg?format=500w",
         "sound": "Alex.mp3",
-        "daysWorked": ["Monday"]
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
       },
       {
         "name": "Arusha",
@@ -41,7 +41,7 @@
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521125495521-MUEUA0WH2KLZL0DLD895/grant-small-2.jpg?format=500w",
         "sound": "Grant.mp3",
-        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday"]
+        "daysWorked": ["Tuesday", "Wednesday", "Thursday", "Friday"]
       },
       {
         "name": "Hannah",
