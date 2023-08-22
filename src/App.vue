@@ -88,7 +88,9 @@
         </div>
       </div>
       <div v-else-if="!checkedStaff.length" class="container">
-        <button @click="playAnnouncements">Any announcements?</button>
+        <button @click="playAnnouncements">
+          Any announcements or PR reviews for projects without a standup?
+        </button>
         <button @click="slackBgSound.pause()">Stop audio</button>
         <button @click="restart">Go again (reset)</button>
         <p v-if="isTodayFriday">
