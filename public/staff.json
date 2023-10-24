@@ -72,13 +72,6 @@
         "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
       },
       {
-        "name": "Louise",
-        "flash": false,
-        "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521125388530-VNB49I3KYGML5U82KVRU/louise-small-2.jpg?format=500w",
-        "sound": "Louise.mp3",
-        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-      },
-      {
         "name": "Luke",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1615915089110-KDK5MVZTW2TPL78A0VHF/lukewd.jpg?format=500w",
