@@ -8,8 +8,8 @@
           <input
             type="checkbox"
             v-model="checkedStaff"
-            :id="staff"
-            :name="staff"
+            :id="staff.name"
+            :name="staff.name"
             :value="staff"
           />{{ staff.name }}
         </label>
@@ -25,7 +25,7 @@
       <div v-if="currentStaff.name !== ''" class="container">
         <p>
           {{ dayAttributes.currentStaffMessage }}
-          <em>{{ currentStaffName }}</em>
+          <em>{{ currentStaff.name }}</em>
         </p>
         <img
           @click="playTheme(currentStaff)"
@@ -48,7 +48,6 @@
             <img
               class="grid-img"
               :class="{ 'grid-img-animate': staff.flash }"
-              :id="index"
               :src="staff.image"
             />
           </div>
@@ -113,6 +112,7 @@ export default class App extends Vue {
         legend: "Ghouls",
         selectedStaffHeader: "Who dares speak their truth?",
         staffHeader: "Lurking in the dark",
+        bgSound: "/sounds/monstermash.mp3",
       };
     }
     if (this.isTodayStarWarsDay) {
