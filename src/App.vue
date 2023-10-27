@@ -1,82 +1,44 @@
 <template>
-  <div
-    v-if="!apiLoading"
-    class="site-wrapper"
-    :class="{
-      starwars: isTodayStarWarsDay,
-      pokemon: isTodayPokemonDay,
-      halloween: isTodayHallooween,
-    }"
-  >
-    <h1 v-if="isTodayHallooween" title="Staff spinner">HAPPY HALLOWEEN</h1>
-    <h1 v-else title="Staff spinner">Staff spinner</h1>
+  <div v-if="!apiLoading" class="site-wrapper" :class="dayAttributes.class">
+    <h1 :title="dayAttributes.title">{{ dayAttributes.header }}</h1>
     <div class="fieldset-container">
       <fieldset>
-        <legend v-if="isTodayHallooween">Ghouls</legend>
-        <legend v-else-if="isTodayStarWarsDay">
-          Who are the droids we're looking for?
-        </legend>
-        <legend v-else-if="isTodayPokemonDay">
-          Team Cogapp, blasting off again!
-        </legend>
-        <legend v-else>Who is in today?</legend>
-
-        <label v-for="(staff, index) in allStaff" v-bind:key="index"
-          ><input
+        <legend>{{ dayAttributes.legend }}</legend>
+        <label v-for="(staff, index) in allStaff" :key="index">
+          <input
             type="checkbox"
             v-model="checkedStaff"
             :id="staff"
             :name="staff"
             :value="staff"
-          />{{ staff.name }}</label
-        >
+          />{{ staff.name }}
+        </label>
       </fieldset>
     </div>
     <div>
-      <div class="container" v-if="checkedStaff.length" ref="selectedStaff">
-        <h2 v-if="isTodayHallooween">Who dares speak their truth?</h2>
-        <h2 v-else-if="isTodayPokemonDay">Will you switch your Pokémon?</h2>
-        <h2 v-else>Spin2win</h2>
+      <div v-if="checkedStaff.length" class="container" ref="selectedStaff">
+        <h2>{{ dayAttributes.selectedStaffHeader }}</h2>
         <button @click="allFlash">
-          <span v-if="isTodayPokemonDay">YES</span>
-          <span v-else>Next up</span>
+          <span>{{ dayAttributes.selectedStaffButton }}</span>
         </button>
       </div>
-      <div v-if="currentStaff.name != ''" class="container">
-        <p v-if="isTodayStarWarsDay">
-          Help me, <em>{{ currentStaff.name }}</em
-          >. You’re my only hope.
-        </p>
-        <p v-else-if="isTodayPokemonDay">
-          Ash sent out <em>{{ currentStaffPokemonName.toUpperCase() }}</em> ({{
-            currentStaff.name.toUpperCase()
-          }})
-        </p>
-        <p v-else>
-          You're up <em>{{ currentStaff.name }}</em>
+      <div v-if="currentStaff.name !== ''" class="container">
+        <p>
+          {{ dayAttributes.currentStaffMessage }}
+          <em>{{ currentStaffName }}</em>
         </p>
         <img
-          v-if="isTodayPokemonDay"
           @click="playTheme(currentStaff)"
           class="lone-img"
-          :src="this.currentStaffPokemonImage"
-        />
-        <img
-          v-else
-          @click="playTheme(currentStaff)"
-          class="lone-img"
-          :src="currentStaff.image"
+          :src="dayAttributes.currentStaffImage"
         />
       </div>
       <div class="container" v-if="checkedStaff.length">
-        <h2 ref="staff" v-if="isTodayHallooween">Lurking in the dark</h2>
-        <h2 ref="staff" v-else-if="isTodayStarWarsDay">Jedi Scum</h2>
-        <h2 ref="staff" v-else-if="isTodayPokemonDay">Pokémon Team</h2>
-        <h2 ref="staff" v-else>Humans2go</h2>
+        <h2 ref="staff">{{ dayAttributes.staffHeader }}</h2>
         <div class="grid-wrapper">
           <div
             v-for="(staff, index) in checkedStaff"
-            v-bind:key="index"
+            :key="index"
             class="grid-img-wrapper"
             :style="{ backgroundColor: randomColor() }"
           >
@@ -92,6 +54,7 @@
           </div>
         </div>
       </div>
+
       <div v-else-if="!checkedStaff.length" class="container">
         <button @click="playAnnouncements">
           Any announcements or PR reviews for projects without a standup?
@@ -128,32 +91,77 @@ export default class App extends Vue {
   apiLoading = true;
   announcementsSound = new Audio("/sounds/announcements.mp3");
 
-  get bgSound(): HTMLAudioElement {
+  get dayAttributes() {
+    const defaultAttributes = {
+      class: "",
+      title: "Staff spinner",
+      header: "Staff spinner",
+      legend: "Who is in today?",
+      bgSound: "/sounds/bg.mp3",
+      slackBgSound: "/sounds/slackbg.mp3",
+      selectedStaffHeader: "Spin2win",
+      selectedStaffButton: "Next up",
+      currentStaffMessage: "You're up",
+      currentStaffImage: this.currentStaff.image,
+      staffHeader: "Humans2go",
+    };
+    if (this.isTodayHallooween) {
+      return {
+        ...defaultAttributes,
+        class: "halloween",
+        header: "HAPPY HALLOWEEN",
+        legend: "Ghouls",
+        selectedStaffHeader: "Who dares speak their truth?",
+        staffHeader: "Lurking in the dark",
+      };
+    }
     if (this.isTodayStarWarsDay) {
-      return new Audio("/sounds/cantina.mp3");
+      return {
+        ...defaultAttributes,
+        class: "starwars",
+        legend: "Who are the droids we're looking for?",
+        bgSound: "/sounds/cantina.mp3",
+        slackBgSound: "/sounds/starwars-theme.mp3",
+        currentStaffMessage:
+          "Help me, " + this.currentStaff.name + ". You’re my only hope.",
+        staffHeader: "Jedi Scum",
+      };
     }
-
-    if (this.isTodayXmasParty) {
-      return new Audio("/sounds/xmas.mp3");
-    }
-
     if (this.isTodayPokemonDay) {
-      return new Audio("/sounds/pokemon-battle.mp3");
+      return {
+        ...defaultAttributes,
+        class: "pokemon",
+        legend: "Team Cogapp, blasting off again!",
+        bgSound: "/sounds/pokemon-battle.mp3",
+        slackBgSound: "/sounds/pokemon-intro.mp3",
+        selectedStaffHeader: "Will you switch your Pokémon?",
+        currentStaffMessage:
+          "Ash sent out " +
+          this.currentStaffPokemonName.toUpperCase() +
+          " (" +
+          this.currentStaff.name.toUpperCase() +
+          ")",
+        currentStaffImage: this.currentStaffPokemonImage,
+        staffHeader: "Pokémon Team",
+        selectedStaffButton: "YES",
+      };
     }
+    if (this.isTodayXmasParty) {
+      return {
+        ...defaultAttributes,
+        class: "xmas",
+        bgSound: "/sounds/xmas.mp3",
+      };
+    }
+    return defaultAttributes;
+  }
 
-    return new Audio("/sounds/bg.mp3");
+  get bgSound(): HTMLAudioElement {
+    return new Audio(this.dayAttributes.bgSound);
   }
 
   get slackBgSound(): HTMLAudioElement {
-    if (this.isTodayStarWarsDay) {
-      return new Audio("/sounds/starwars-theme.mp3");
-    }
-
-    if (this.isTodayPokemonDay) {
-      return new Audio("/sounds/pokemon-intro.mp3");
-    }
-
-    return new Audio("/sounds/slackbg.mp3");
+    return new Audio(this.dayAttributes.slackBgSound);
   }
 
   mounted(): void {
