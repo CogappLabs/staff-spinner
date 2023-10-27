@@ -138,6 +138,14 @@ em {
   src: url("fonts/pokemon_classic/Pokemon Classic.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "CF Halloween";
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: url("fonts/CFHalloween-Regular.ttf") format("truetype");
+}
+
 /* STAR WARS DAY */
 .starwars {
   font-family: "star jedi";
@@ -158,6 +166,34 @@ em {
 
 .starwars .grid-img-name {
   text-shadow: 0 0 4px black;
+}
+
+/* HALLOWEEN DAY */
+.halloween {
+  background-color: black;
+  color: orange;
+  accent-color: red;
+}
+.halloween > h1 {
+  margin-top: 0;
+  font-family: "CF Halloween";
+  font-size: 4rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.halloween .grid-img-wrapper,
+.halloween .lone-img {
+  filter: sepia(1) hue-rotate(20deg) brightness(90%) contrast(110%);
+  transition: filter 0.5s ease-in-out;
+}
+
+.halloween button {
+  background-color: orange;
+}
+.halloween button:hover {
+  border-color: black;
+  color: white;
 }
 
 /* POKEMON DAY */

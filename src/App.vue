@@ -5,12 +5,15 @@
     :class="{
       starwars: isTodayStarWarsDay,
       pokemon: isTodayPokemonDay,
+      halloween: isTodayHallooween,
     }"
   >
-    <h1 title="Staff spinner">Staff spinner</h1>
+    <h1 v-if="isTodayHallooween" title="Staff spinner">HAPPY HALLOWEEN</h1>
+    <h1 v-else title="Staff spinner">Staff spinner</h1>
     <div class="fieldset-container">
       <fieldset>
-        <legend v-if="isTodayStarWarsDay">
+        <legend v-if="isTodayHallooween">Ghouls</legend>
+        <legend v-else-if="isTodayStarWarsDay">
           Who are the droids we're looking for?
         </legend>
         <legend v-else-if="isTodayPokemonDay">
@@ -31,7 +34,8 @@
     </div>
     <div>
       <div class="container" v-if="checkedStaff.length" ref="selectedStaff">
-        <h2 v-if="isTodayPokemonDay">Will you switch your Pokémon?</h2>
+        <h2 v-if="isTodayHallooween">Who dares speak their truth?</h2>
+        <h2 v-else-if="isTodayPokemonDay">Will you switch your Pokémon?</h2>
         <h2 v-else>Spin2win</h2>
         <button @click="allFlash">
           <span v-if="isTodayPokemonDay">YES</span>
@@ -65,7 +69,8 @@
         />
       </div>
       <div class="container" v-if="checkedStaff.length">
-        <h2 ref="staff" v-if="isTodayStarWarsDay">Jedi Scum</h2>
+        <h2 ref="staff" v-if="isTodayHallooween">Lurking in the dark</h2>
+        <h2 ref="staff" v-else-if="isTodayStarWarsDay">Jedi Scum</h2>
         <h2 ref="staff" v-else-if="isTodayPokemonDay">Pokémon Team</h2>
         <h2 ref="staff" v-else>Humans2go</h2>
         <div class="grid-wrapper">
@@ -184,6 +189,14 @@ export default class App extends Vue {
 
     const today = new Date();
     return today.getMonth() === 1 && today.getDate() === 27;
+  }
+
+  get isTodayHallooween(): boolean {
+    if (this.whimsyQueryParam === "boo") {
+      return true;
+    }
+    const today = new Date();
+    return today.getMonth() === 9 && today.getDate() === 31;
   }
 
   get whimsyQueryParam(): string | null {
