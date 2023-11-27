@@ -59,17 +59,28 @@
           Any announcements or PR reviews for projects without a standup?
         </button>
         <button @click="slackBgSound.pause()">Stop audio</button>
+        <button @click="pickRandomTechStaff">PR Requestee</button>
         <button @click="restart">Go again (reset)</button>
-        <p v-if="isTodayFriday">
-          Friday is a special day… Please do your TRS
-          <span class="trs-days">X</span>&nbsp;<span class="trs-days">X</span
-          >&nbsp;<span class="trs-days">X</span>&nbsp;<span class="trs-days"
-            >X</span
-          >&nbsp;<span class="trs-days">today</span>
-        </p>
+        <div v-if="techPerson.name" class="container">
+          <p>
+            <em>{{ techPerson.name }}</em>
+          </p>
+          <img
+            @click="playTheme(techPerson)"
+            class="lone-img"
+            :src="techPerson.image"
+          />
+        </div>
       </div>
     </div>
+    <p v-if="isTodayFriday">
+      Friday is a special day… Please do your TRS
+      <span class="trs-days">X</span>&nbsp;<span class="trs-days">X</span
+      >&nbsp;<span class="trs-days">X</span>&nbsp;<span class="trs-days">X</span
+      >&nbsp;<span class="trs-days">today</span>
+    </p>
   </div>
+
   <div v-else>Reticulating splines…</div>
 </template>
 
@@ -83,8 +94,16 @@ import PokeAPI from "pokeapi-typescript";
 export default class App extends Vue {
   allStaff = {} as Staff[];
   checkedStaff = {} as Staff[];
-  blankStaff = { name: "", flash: false, image: "", daysWorked: [] };
+  blankStaff = {
+    name: "",
+    flash: false,
+    image: "",
+    daysWorked: [],
+    tech: false,
+  };
   currentStaff: Staff = this.blankStaff;
+  techPerson: Staff = this.blankStaff;
+  techStaff: Staff[] = [];
   currentStaffPokemonImage = "";
   currentStaffPokemonName = "";
   apiLoading = true;
@@ -266,6 +285,7 @@ export default class App extends Vue {
       this.checkedStaff = response.filter((staffMember) =>
         staffMember.daysWorked.includes(this.dayString)
       );
+      this.techStaff = response.filter((staffMember) => staffMember.tech);
       this.apiLoading = false;
     });
   }
@@ -301,6 +321,25 @@ export default class App extends Vue {
   playAnnouncements(): void {
     this.announcementsSound.play();
     this.slackBgSound.play();
+  }
+
+  pickRandomTechStaff(): void {
+    // Filter out the currently selected tech person
+    const filteredTechStaff = this.techStaff.filter(
+      (staff) => staff.name !== this.techPerson.name
+    );
+
+    if (filteredTechStaff.length === 0) {
+      // Reset the list if all tech staff have been picked
+      this.techStaff = this.allStaff.filter((staff) => staff.tech);
+      return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * filteredTechStaff.length);
+    this.techPerson = filteredTechStaff[randomIndex];
+
+    // Update the techStaff array to exclude the picked staff member
+    this.techStaff = filteredTechStaff;
   }
 }
 </script>
