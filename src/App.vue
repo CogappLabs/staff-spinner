@@ -205,8 +205,11 @@ export default class App extends Vue {
   }
 
   get isTodayXmasParty(): boolean {
+    if (this.whimsyQueryParam === "xmas") {
+      return true;
+    }
     const today = new Date();
-    return today.getMonth() === 11 && today.getDate() === 16;
+    return today.getMonth() === 11 && today.getDate() === 8;
   }
 
   get isTodayPokemonDay(): boolean {
