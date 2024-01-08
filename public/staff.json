@@ -90,6 +90,14 @@
         "tech": false
       },
       {
+        "name": "Lou",
+        "flash": false,
+        "image": "https://ladiesthatux.com/wp-content/uploads/2023/01/Lou_2023-2048x2048.jpg",
+        "sound": "Lou.mp3",
+        "daysWorked": ["Monday", "Wednesday", "Friday"],
+        "tech": false
+      },
+      {
         "name": "Matt",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1591012058042-HRMWKIU1NWNXMURG2SLV/IMG_0399.jpg?format=500w",
