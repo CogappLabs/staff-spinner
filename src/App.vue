@@ -27,11 +27,17 @@
           {{ dayAttributes.currentStaffMessage }}
           <em>{{ currentStaff.name }}</em>
         </p>
-        <img
-          @click="playTheme(currentStaff)"
-          class="lone-img"
-          :src="dayAttributes.currentStaffImage"
-        />
+        <div class="image-container">
+          <img
+            @click="playTheme(currentStaff)"
+            class="lone-img"
+            :src="dayAttributes.currentStaffImage"
+          />
+          <div
+            class="week-representation"
+            v-html="currentStaffWeekRepresentation"
+          ></div>
+        </div>
       </div>
       <div class="container" v-if="checkedStaff.length">
         <h2 ref="staff">{{ dayAttributes.staffHeader }}</h2>
@@ -96,10 +102,17 @@ export default class App extends Vue {
   checkedStaff = {} as Staff[];
   blankStaff = {
     name: "",
+    initials: "",
     flash: false,
     image: "",
     daysWorked: [],
     tech: false,
+    weekReports: [
+      {
+        date: "",
+        hasEntry: false,
+      },
+    ],
   };
   currentStaff: Staff = this.blankStaff;
   techPerson: Staff = this.blankStaff;
@@ -173,6 +186,38 @@ export default class App extends Vue {
       };
     }
     return defaultAttributes;
+  }
+
+  get currentStaffWeekRepresentation(): string {
+    if (
+      !this.currentStaff.weekReports ||
+      this.currentStaff.weekReports.length === 0
+    ) {
+      return "";
+    }
+
+    const lastWeekReports = this.currentStaff.weekReports
+      .slice(0, 5)
+      .map((report) =>
+        report.hasEntry
+          ? '<span class="trs-days-tick">✓</span>'
+          : '<span class="trs-days">✗</span>'
+      )
+      .join(" ");
+
+    const thisWeekReports = this.currentStaff.weekReports
+      .slice(5)
+      .map((report) =>
+        report.hasEntry
+          ? '<span class="trs-days-tick">✓</span>'
+          : '<span class="trs-days">✗</span>'
+      )
+      .join(" ");
+
+    return `
+    <div class="week-label">Last week: ${lastWeekReports}</div>
+    <div class="week-label">This week: ${thisWeekReports}</div>
+  `;
   }
 
   get bgSound(): HTMLAudioElement {
@@ -283,9 +328,30 @@ export default class App extends Vue {
     });
   }
   getStaff(): void {
-    fetchStaffAPI.fetchStaff().then((response) => {
+    fetchStaffAPI.fetchStaff().then(async (response) => {
       this.allStaff = response;
-      this.checkedStaff = response.filter((staffMember) =>
+
+      try {
+        const weekReportsResponse = await fetch(
+          "http://localhost:3000/api/missing-time-report-entries"
+        );
+
+        if (weekReportsResponse.ok) {
+          const weekReportsData = await weekReportsResponse.json();
+          // Combine the week reports with your existing staff data
+          this.allStaff = this.allStaff.map((staff) => ({
+            ...staff,
+            weekReports:
+              weekReportsData.find((r: any) => r.initials === staff.initials)
+                ?.weekReports || [],
+          }));
+        }
+      } catch (error) {
+        // Handle the error here (e.g., log it)
+        console.error("Error fetching week reports:", error);
+      }
+
+      this.checkedStaff = this.allStaff.filter((staffMember) =>
         staffMember.daysWorked.includes(this.dayString)
       );
       this.techStaff = response.filter((staffMember) => staffMember.tech);

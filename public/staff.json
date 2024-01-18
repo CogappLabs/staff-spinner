@@ -3,6 +3,7 @@
     "staff": [
       {
         "name": "Andy",
+        "initials": "AC",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1602170749820-OGYKNEV4EXI95Q1FMLDE/AndyCummins.jpg?format=500w",
         "sound": "Andy.mp3",
@@ -11,6 +12,7 @@
       },
       {
         "name": "Alex",
+        "initials": "AM",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1488815272617-79VM1AF6S11NB7H85GL7/image-asset.jpeg?format=500w",
         "sound": "Alex.mp3",
@@ -27,6 +29,7 @@
       },
       {
         "name": "Ben",
+        "initials": "BR",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521128137044-DOCW62GKT5OFS4ZBNR0Y/ben-small-1.jpg?format=500w",
         "sound": "Ben.mp3",
@@ -35,6 +38,7 @@
       },
       {
         "name": "Emily",
+        "initials": "EO",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1591020543497-BBTKJDIQKCKNDCV782CM/emily3edit.jpg?format=500w",
         "sound": "Emily.mp3",
@@ -43,6 +47,7 @@
       },
       {
         "name": "Grant",
+        "initials": "GC",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521125495521-MUEUA0WH2KLZL0DLD895/grant-small-2.jpg?format=500w",
         "sound": "Grant.mp3",
@@ -51,6 +56,7 @@
       },
       {
         "name": "Hannah",
+        "initials": "HB",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/9e91d44b-fd6a-4a18-8e6e-8f35ea8e1e3d/HannahB.jpg?format=500w",
         "sound": "Hannah.mp3",
@@ -59,6 +65,7 @@
       },
       {
         "name": "Iain",
+        "initials": "IB",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1610975738054-XPGU8306ZJKLPVFTPGZI/me.jpg?format=500w",
         "sound": "Iain.mp3",
@@ -67,6 +74,7 @@
       },
       {
         "name": "James",
+        "initials": "JTW",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1560775570386-VOFV4X5XF4P6Y3SQU2J1/Image+from+iOS+%281%29.jpg?format=500w",
         "sound": "James.mp3",
@@ -75,6 +83,7 @@
       },
       {
         "name": "Jon",
+        "initials": "JW",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521818417633-0ESQX8911EEHZEJ50D41/ca-1.jpg?format=500w",
         "sound": "Jon.mp3",
@@ -83,6 +92,7 @@
       },
       {
         "name": "Luke",
+        "initials": "LWD",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1615915089110-KDK5MVZTW2TPL78A0VHF/lukewd.jpg?format=500w",
         "sound": "Luke.mp3",
@@ -91,6 +101,7 @@
       },
       {
         "name": "Lou",
+        "initials": "LVC",
         "flash": false,
         "image": "https://ladiesthatux.com/wp-content/uploads/2023/01/Lou_2023-2048x2048.jpg",
         "sound": "Lou.mp3",
@@ -99,6 +110,7 @@
       },
       {
         "name": "Matt",
+        "initials": "MC",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1591012058042-HRMWKIU1NWNXMURG2SLV/IMG_0399.jpg?format=500w",
         "sound": "Matt.mp3",
@@ -107,6 +119,7 @@
       },
       {
         "name": "Neil",
+        "initials": "NH",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1521818512674-LSF0MJGLL5DA28CEGW7R/ca-7.jpg?format=500w",
         "sound": "Neil.mp3",
@@ -115,6 +128,7 @@
       },
       {
         "name": "Nick",
+        "initials": "NC",
         "flash": false,
         "image": "https://cogapp-website-files-prod.s3.eu-west-2.amazonaws.com/Team-photos/_432x432_crop_center-center_none/NickC.jpg",
         "sound": "Nick.mp3",
@@ -123,6 +137,7 @@
       },
       {
         "name": "Nitin",
+        "initials": "NL",
         "flash": false,
         "image": "https://ca.slack-edge.com/T045774MG-U02KE3ZM5LY-6a3476e26248-512",
         "sound": "Nitin.mp3",
@@ -131,6 +146,7 @@
       },
       {
         "name": "Scout",
+        "initials": "SB",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1574091028333-SEDTF04PLLH5JBTUXFL4/Image+from+iOS+%282%29.jpg?format=500w",
         "sound": "Scout.mp3",
@@ -139,6 +155,7 @@
       },
       {
         "name": "Steve",
+        "initials": "SN",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1488815669959-GGX5VVLTXYWH96BARUST/image-asset.png?format=500w",
         "sound": "Steve.mp3",
@@ -147,6 +164,7 @@
       },
       {
         "name": "Tristan",
+        "initials": "TR",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1516702449445-HM18UV7Y944SP3WNYA8O/20180117-IMG_7520.jpg?format=500w",
         "sound": "Tristan.mp3",

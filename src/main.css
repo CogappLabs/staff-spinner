@@ -49,6 +49,13 @@ button:hover {
   font-family: arial, helvetica, sans-serif;
   font-size: 10pt;
 }
+.trs-days-tick {
+  color: green;
+  text-decoration: underline;
+  font-weight: bold;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt;
+}
 
 .grid-img-animate {
   animation: grid-image 0.1s 2;
@@ -69,7 +76,7 @@ button:hover {
   }
 }
 .lone-img {
-  height: 200;
+  max-height: 250px;
   max-width: 400px;
   object-fit: cover;
   border-radius: 50%;
@@ -264,4 +271,15 @@ em {
 .pokemon label {
   font-family: unset;
   font-size: 0.9rem;
+}
+
+.container .image-container {
+  display: flex; /* Use Flexbox for the image and week representation */
+  align-items: center; /* Center vertically */
+}
+
+.week-representation {
+  margin-left: 20px; /* Adjust the margin as needed */
+  font-size: 18px;
+  color: #333;
 }
