@@ -93,7 +93,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import fetchStaffAPI from "@/api";
-import { Staff } from "@/interfaces";
+import { Staff, WeekReport } from "@/interfaces";
 import PokeAPI from "pokeapi-typescript";
 
 @Component
@@ -196,28 +196,29 @@ export default class App extends Vue {
       return "";
     }
 
+    const formatDay = (report: WeekReport, day: string) => {
+    if (!this.currentStaff.daysWorked.includes(day)) {
+      return '<span class="trs-days-off">-</span>'; // Display grey '0' for days not worked
+    }
+      return report.hasEntry ? '<span class="trs-days-tick">✓</span>' : '<span class="trs-days">✗</span>';
+    };
+
+    const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
     const lastWeekReports = this.currentStaff.weekReports
       .slice(0, 5)
-      .map((report) =>
-        report.hasEntry
-          ? '<span class="trs-days-tick">✓</span>'
-          : '<span class="trs-days">✗</span>'
-      )
+      .map((report, index) => formatDay(report, daysOfWeek[index]))
       .join(" ");
 
     const thisWeekReports = this.currentStaff.weekReports
       .slice(5)
-      .map((report) =>
-        report.hasEntry
-          ? '<span class="trs-days-tick">✓</span>'
-          : '<span class="trs-days">✗</span>'
-      )
+      .map((report, index) => formatDay(report, daysOfWeek[index]))
       .join(" ");
 
     return `
-    <div class="week-label">Last week: ${lastWeekReports}</div>
-    <div class="week-label">This week: ${thisWeekReports}</div>
-  `;
+      <div class="week-label">Last week: ${lastWeekReports}</div>
+      <div class="week-label">This week: ${thisWeekReports}</div>
+    `;
   }
 
   get bgSound(): HTMLAudioElement {

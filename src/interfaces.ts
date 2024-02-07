@@ -9,7 +9,7 @@ export interface Staff {
   weekReports: WeekReport[];
 }
 
-interface WeekReport {
+export interface WeekReport {
   date: string;
   hasEntry: boolean;
 }

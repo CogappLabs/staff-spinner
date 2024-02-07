@@ -57,6 +57,10 @@ button:hover {
   font-size: 10pt;
 }
 
+.trs-days-off {
+  color: #aaa;
+}
+
 .grid-img-animate {
   animation: grid-image 0.1s 2;
   animation-direction: alternate;
