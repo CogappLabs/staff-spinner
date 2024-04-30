@@ -61,6 +61,9 @@
       </div>
 
       <div v-else-if="!checkedStaff.length" class="container">
+        <h2 v-if="announcementQueryParam">
+          Announcement: {{ announcementQueryParam }}
+        </h2>
         <button @click="playAnnouncements">
           Any announcements or PR reviews for projects without a standup?
         </button>
@@ -197,10 +200,12 @@ export default class App extends Vue {
     }
 
     const formatDay = (report: WeekReport, day: string) => {
-    if (!this.currentStaff.daysWorked.includes(day)) {
-      return '<span class="trs-days-off">-</span>'; // Display grey '0' for days not worked
-    }
-      return report.hasEntry ? '<span class="trs-days-tick">✓</span>' : '<span class="trs-days">✗</span>';
+      if (!this.currentStaff.daysWorked.includes(day)) {
+        return '<span class="trs-days-off">-</span>'; // Display grey '0' for days not worked
+      }
+      return report.hasEntry
+        ? '<span class="trs-days-tick">✓</span>'
+        : '<span class="trs-days">✗</span>';
     };
 
     const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -278,6 +283,11 @@ export default class App extends Vue {
   get whimsyQueryParam(): string | null {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get("whimsy");
+  }
+
+  get announcementQueryParam(): string | null {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get("announcement");
   }
 
   pickStaff(): void {
