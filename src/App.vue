@@ -82,12 +82,6 @@
         </div>
       </div>
     </div>
-    <p v-if="isTodayFriday">
-      Friday is a special day… Please do your TRS
-      <span class="trs-days">X</span>&nbsp;<span class="trs-days">X</span
-      >&nbsp;<span class="trs-days">X</span>&nbsp;<span class="trs-days">X</span
-      >&nbsp;<span class="trs-days">today</span>
-    </p>
   </div>
 
   <div v-else>Reticulating splines…</div>
@@ -241,10 +235,6 @@ export default class App extends Vue {
   get dayString(): string {
     let current = new Date();
     return current.toLocaleDateString("en-GB", { weekday: "long" });
-  }
-
-  get isTodayFriday(): boolean {
-    return this.dayString === "Friday";
   }
 
   get isTodayStarWarsDay(): boolean {
