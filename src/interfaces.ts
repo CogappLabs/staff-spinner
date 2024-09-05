@@ -14,6 +14,11 @@ export interface WeekReport {
   hasEntry: boolean;
 }
 
+export interface WeekReportsData {
+  initials: string;
+  weekReports: WeekReport[];
+}
+
 export interface staffResponse {
   data: { staff: Staff[] };
 }

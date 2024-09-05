@@ -90,7 +90,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import fetchStaffAPI from "@/api";
-import { Staff, WeekReport } from "@/interfaces";
+import { Staff, WeekReport, WeekReportsData } from "@/interfaces";
 import PokeAPI from "pokeapi-typescript";
 
 @Component
@@ -118,6 +118,8 @@ export default class App extends Vue {
   currentStaffPokemonName = "";
   apiLoading = true;
   announcementsSound = new Audio("/sounds/announcements.mp3");
+  MAX_POKEMON_ID = 151;
+  FLASH_DELAY = 200;
 
   get dayAttributes() {
     const defaultAttributes = {
@@ -317,9 +319,9 @@ export default class App extends Vue {
               this.removeFlashClass();
               this.bgSound.pause();
               this.pickStaff();
-            }, 200);
+            }, this.FLASH_DELAY);
           }
-        }, idx * 200);
+        }, idx * this.FLASH_DELAY);
       }
     );
   }
@@ -328,36 +330,48 @@ export default class App extends Vue {
       staffMember.flash = false;
     });
   }
-  getStaff(): void {
-    fetchStaffAPI.fetchStaff().then(async (response) => {
-      this.allStaff = response;
-
-      try {
-        const weekReportsResponse = await fetch(
-          "http://localhost:3000/api/missing-time-report-entries"
-        );
-
-        if (weekReportsResponse.ok) {
-          const weekReportsData = await weekReportsResponse.json();
-          // Combine the week reports with your existing staff data
-          this.allStaff = this.allStaff.map((staff) => ({
-            ...staff,
-            weekReports:
-              weekReportsData.find((r: any) => r.initials === staff.initials)
-                ?.weekReports || [],
-          }));
-        }
-      } catch (error) {
-        // Handle the error here (e.g., log it)
-        console.error("Error fetching week reports:", error);
-      }
-
-      this.checkedStaff = this.allStaff.filter((staffMember) =>
-        staffMember.daysWorked.includes(this.dayString)
-      );
-      this.techStaff = response.filter((staffMember) => staffMember.tech);
+  async getStaff(): Promise<void> {
+    try {
+      const staffResponse = await fetchStaffAPI.fetchStaff();
+      this.allStaff = staffResponse;
+      await this.addWeekReports();
+      this.filterStaffByDay();
+      this.filterTechStaff();
       this.apiLoading = false;
-    });
+    } catch (error) {
+      console.error("Error fetching staff or week reports:", error);
+    }
+  }
+
+  async addWeekReports(): Promise<void> {
+    try {
+      const weekReportsResponse = await fetch(
+        "http://localhost:3000/api/missing-time-report-entries"
+      );
+      if (weekReportsResponse.ok) {
+        const weekReportsData: WeekReportsData[] =
+          await weekReportsResponse.json();
+        this.allStaff = this.allStaff.map((staff) => ({
+          ...staff,
+          weekReports:
+            weekReportsData.find(
+              (weekReportData) => weekReportData.initials === staff.initials
+            )?.weekReports || [],
+        }));
+      }
+    } catch (error) {
+      console.error("Error fetching week reports:", error);
+    }
+  }
+
+  filterStaffByDay(): void {
+    this.checkedStaff = this.allStaff.filter((staffMember) =>
+      staffMember.daysWorked.includes(this.dayString)
+    );
+  }
+
+  filterTechStaff(): void {
+    this.techStaff = this.allStaff.filter((staffMember) => staffMember.tech);
   }
 
   getPokemonImage(name: string): void {
@@ -365,7 +379,8 @@ export default class App extends Vue {
       .split("")
       .map((char) => char.charCodeAt(0))
       .reduce((acc, val) => acc + val, 0);
-    const randomNumber = Math.floor(Math.abs(Math.sin(seed)) * 151) + 1;
+    const randomNumber =
+      Math.floor(Math.abs(Math.sin(seed)) * this.MAX_POKEMON_ID) + 1;
     PokeAPI.Pokemon.resolve(randomNumber).then((result) => {
       this.currentStaffPokemonImage = result.sprites.front_default;
       this.currentStaffPokemonName = result.name;
@@ -373,19 +388,18 @@ export default class App extends Vue {
   }
 
   randomColor(): string {
-    let randomColour = "#" + ((Math.random() * 0xffffff) << 0).toString(16);
-    return randomColour;
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
   }
   scrollToStaff(): void {
-    const el = this.$refs.staff as HTMLElement;
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    const selectedStaffElement = this.$refs.staff as HTMLElement;
+    if (selectedStaffElement) {
+      selectedStaffElement.scrollIntoView({ behavior: "smooth" });
     }
   }
   scrollToSelectedStaff(): void {
-    const el = this.$refs.selectedStaff as HTMLElement;
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    const selectedStaffElement = this.$refs.selectedStaff as HTMLElement;
+    if (selectedStaffElement) {
+      selectedStaffElement.scrollIntoView({ behavior: "smooth" });
     }
   }
   playAnnouncements(): void {
