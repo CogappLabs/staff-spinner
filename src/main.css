@@ -56,6 +56,13 @@ button:hover {
   font-family: arial, helvetica, sans-serif;
   font-size: 10pt;
 }
+.trs-days-circle {
+  color: orange;
+  text-decoration: underline;
+  font-weight: bold;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt;
+}
 
 .trs-days-off {
   color: #aaa;

@@ -108,6 +108,7 @@ export default class App extends Vue {
       {
         date: "",
         hasEntry: false,
+        lessThanTwoHours: false,
       },
     ],
   };
@@ -198,6 +199,10 @@ export default class App extends Vue {
     const formatDay = (report: WeekReport, day: string) => {
       if (!this.currentStaff.daysWorked.includes(day)) {
         return '<span class="trs-days-off">-</span>'; // Display grey '0' for days not worked
+      }
+
+      if (report.lessThanTwoHours) {
+        return '<span class="trs-days-circle">○</span>'; // Display circle emoji if less than 2 hours
       }
       return report.hasEntry
         ? '<span class="trs-days-tick">✓</span>'
