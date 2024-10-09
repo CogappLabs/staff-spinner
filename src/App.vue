@@ -82,6 +82,21 @@
         </div>
       </div>
     </div>
+    <div class="container key-section">
+      <h3>Key</h3>
+      <ul>
+        <li><span class="trs-days">✗</span> - No time entry for the day</li>
+        <li>
+          <span class="trs-days-circle">○</span> - Less than two hours of time
+          logged
+        </li>
+        <li>
+          <span class="trs-days-tick">✓</span> - Time entry exists and more than
+          two hours logged
+        </li>
+        <li><span class="trs-days-off">-</span> - Not scheduled to work</li>
+      </ul>
+    </div>
   </div>
 
   <div v-else>Reticulating splines…</div>
@@ -201,12 +216,18 @@ export default class App extends Vue {
         return '<span class="trs-days-off">-</span>'; // Display grey '0' for days not worked
       }
 
+      // Show '✗' if no entry exists
+      if (!report.hasEntry) {
+        return '<span class="trs-days">✗</span>';
+      }
+
+      // Show circle if less than two hours
       if (report.lessThanTwoHours) {
         return '<span class="trs-days-circle">○</span>'; // Display circle emoji if less than 2 hours
       }
-      return report.hasEntry
-        ? '<span class="trs-days-tick">✓</span>'
-        : '<span class="trs-days">✗</span>';
+
+      // Show tick if entry exists and more than two hours
+      return '<span class="trs-days-tick">✓</span>';
     };
 
     const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
