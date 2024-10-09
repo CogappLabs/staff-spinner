@@ -303,15 +303,15 @@ export default class App extends Vue {
     `;
   }
 
-  get bgSound(): HTMLAudioElement {
-    return new Audio(this.dayAttributes.bgSound);
-  }
+  bgSound: HTMLAudioElement | null = null;
 
   get slackBgSound(): HTMLAudioElement {
     return new Audio(this.dayAttributes.slackBgSound);
   }
 
   mounted(): void {
+    this.bgSound = new Audio(this.dayAttributes.bgSound);
+    this.bgSound.loop = true;
     this.getStaff();
   }
 
@@ -380,7 +380,9 @@ export default class App extends Vue {
   restart(): void {
     this.checkedStaff = this.allStaff;
     this.currentStaff = this.blankStaff;
-    this.bgSound.pause();
+    if (this.bgSound) {
+      this.bgSound.pause();
+    }
   }
   playTheme(staffName: Staff): void {
     let sound = new Audio(`/sounds/${staffName.sound}`);
@@ -388,7 +390,7 @@ export default class App extends Vue {
     sound.play();
   }
   allFlash(): void {
-    this.bgSound.loop = true;
+    if (!this.bgSound) return; // Ensure bgSound is initialized
     this.bgSound.play();
 
     let index = 0;
@@ -418,14 +420,16 @@ export default class App extends Vue {
       // Stop the cycling after a certain number of cycles
       if (cycleCount >= totalCycles) {
         clearInterval(interval);
-
+        console.log("end");
         // Pick the final staff member to land on
         this.pickStaff();
 
         // Remove the flashing effect and stop the background sound
         setTimeout(() => {
           this.removeFlashClass();
-          this.bgSound.pause();
+          if (this.bgSound) {
+            this.bgSound.pause();
+          }
         }, this.FLASH_DELAY);
       }
     }, cycleInterval);
