@@ -7,6 +7,7 @@ export interface Staff {
   daysWorked: string[];
   tech: boolean;
   weekReports: WeekReport[];
+  color: string;
 }
 
 export interface WeekReport {

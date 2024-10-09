@@ -1,100 +1,154 @@
 <template>
-  <div v-if="!apiLoading" class="site-wrapper" :class="dayAttributes.class">
-    <h1 :title="dayAttributes.title">{{ dayAttributes.header }}</h1>
-    <div class="fieldset-container">
-      <fieldset>
-        <legend>{{ dayAttributes.legend }}</legend>
-        <label v-for="(staff, index) in allStaff" :key="index">
-          <input
-            type="checkbox"
-            v-model="checkedStaff"
-            :id="staff.name"
-            :name="staff.name"
-            :value="staff"
-          />{{ staff.name }}
-        </label>
+  <div
+    v-if="!apiLoading"
+    class="min-h-screen p-4 font-dyslexic"
+    :class="dayAttributes.class"
+  >
+    <h1 :title="dayAttributes.title" class="text-4xl font-bold">
+      {{ dayAttributes.header }}
+    </h1>
+    <div class="my-4">
+      <fieldset class="border border-gray-300 p-4 rounded">
+        <legend class="font-semibold">{{ dayAttributes.legend }}</legend>
+        <div class="flex flex-wrap gap-4">
+          <!-- Added flex, flex-wrap, and gap -->
+          <label
+            v-for="(staff, index) in allStaff"
+            :key="index"
+            class="flex items-center"
+          >
+            <input
+              type="checkbox"
+              v-model="checkedStaff"
+              :id="staff.name"
+              :name="staff.name"
+              :value="staff"
+              class="mr-2"
+            />{{ staff.name }}
+          </label>
+        </div>
       </fieldset>
     </div>
+
     <div>
-      <div v-if="checkedStaff.length" class="container" ref="selectedStaff">
-        <h2>{{ dayAttributes.selectedStaffHeader }}</h2>
-        <button @click="allFlash">
+      <div v-if="checkedStaff.length" class="mt-6" ref="selectedStaff">
+        <h2 class="text-2xl font-semibold">
+          {{ dayAttributes.selectedStaffHeader }}
+        </h2>
+        <button
+          @click="allFlash"
+          class="bg-white text-black border border-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors duration-200 mt-6"
+        >
           <span>{{ dayAttributes.selectedStaffButton }}</span>
         </button>
       </div>
-      <div v-if="currentStaff.name !== ''" class="container">
-        <p>
+      <div v-if="currentStaff.name !== ''" class="mt-4">
+        <p class="text-lg">
           {{ dayAttributes.currentStaffMessage }}
           <em>{{ currentStaff.name }}</em>
         </p>
-        <div class="image-container">
+        <div class="flex items-center">
           <img
             @click="playTheme(currentStaff)"
-            class="lone-img"
+            class="w-64 h-64 rounded-full grayscale object-cover shadow-lg"
             :src="dayAttributes.currentStaffImage"
           />
-          <div
-            class="week-representation"
-            v-html="currentStaffWeekRepresentation"
-          ></div>
+          <div class="ml-4" v-html="currentStaffWeekRepresentation"></div>
         </div>
       </div>
-      <div class="container" v-if="checkedStaff.length">
-        <h2 ref="staff">{{ dayAttributes.staffHeader }}</h2>
-        <div class="grid-wrapper">
+      <div v-if="checkedStaff.length" class="mt-6">
+        <h2 class="text-2xl font-semibold" ref="staff">
+          {{ dayAttributes.staffHeader }}
+        </h2>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mt-6"
+        >
           <div
             v-for="(staff, index) in checkedStaff"
             :key="index"
-            class="grid-img-wrapper"
-            :style="{ backgroundColor: randomColor() }"
+            class="p-4 shadow-lg rounded overflow-hidden"
+            :style="{ backgroundColor: staff.color }"
           >
-            <div class="grid-img-name">
+            <!-- Wrapping the image in a div to apply the pulse effect -->
+            <div
+              :class="{ 'animate-custom-pulse': staff.flash }"
+              class="p-2 rounded-full"
+            >
+              <img
+                class="w-full h-64 object-cover rounded"
+                :src="staff.image"
+              />
+            </div>
+            <div
+              class="text-center mb-2 font-semibold uppercase tracking-wider"
+            >
               {{ staff.name }}
             </div>
-            <img
-              class="grid-img"
-              :class="{ 'grid-img-animate': staff.flash }"
-              :src="staff.image"
-            />
           </div>
         </div>
       </div>
 
-      <div v-else-if="!checkedStaff.length" class="container">
-        <h2 v-if="announcementQueryParam">
+      <div v-else-if="!checkedStaff.length" class="mt-6">
+        <h2 v-if="announcementQueryParam" class="text-2xl font-semibold">
           Announcement: {{ announcementQueryParam }}
         </h2>
-        <button @click="playAnnouncements">
-          Any announcements or PR reviews for projects without a standup?
-        </button>
-        <button @click="slackBgSound.pause()">Stop audio</button>
-        <button @click="pickRandomTechStaff">PR Requestee</button>
-        <button @click="restart">Go again (reset)</button>
-        <div v-if="techPerson.name" class="container">
-          <p>
+
+        <!-- Flexbox layout with wrap and space between buttons -->
+        <div class="flex flex-wrap gap-4">
+          <button
+            @click="playAnnouncements"
+            class="bg-white text-black border border-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors duration-200"
+          >
+            Any announcements or PR reviews for projects without a standup?
+          </button>
+          <button
+            @click="slackBgSound.pause()"
+            class="bg-white text-black border border-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors duration-200"
+          >
+            Stop audio
+          </button>
+          <button
+            @click="pickRandomTechStaff"
+            class="bg-white text-black border border-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors duration-200"
+          >
+            PR Requestee
+          </button>
+          <button
+            @click="restart"
+            class="bg-white text-black border border-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors duration-200"
+          >
+            Go again (reset)
+          </button>
+        </div>
+
+        <div v-if="techPerson.name" class="mt-4">
+          <p class="text-lg">
             <em>{{ techPerson.name }}</em>
           </p>
           <img
             @click="playTheme(techPerson)"
-            class="lone-img"
+            class="w-64 h-64 rounded-full object-cover shadow-lg"
             :src="techPerson.image"
           />
         </div>
       </div>
     </div>
-    <div class="container key-section">
-      <h3>Key</h3>
-      <ul>
-        <li><span class="trs-days">✗</span> - No time entry for the day</li>
+    <div class="mt-8">
+      <h3 class="text-lg font-semibold">Key</h3>
+      <ul class="space-y-2">
         <li>
-          <span class="trs-days-circle">○</span> - Less than two hours of time
-          logged
+          <span class="text-red-500 font-bold underline">✗</span> - No time
+          entry for the day
         </li>
         <li>
-          <span class="trs-days-tick">✓</span> - Time entry exists and more than
-          two hours logged
+          <span class="text-orange-500 font-bold underline">○</span> - Less than
+          two hours of time logged
         </li>
-        <li><span class="trs-days-off">-</span> - Not scheduled to work</li>
+        <li>
+          <span class="text-green-500 font-bold underline">✓</span> - Time entry
+          exists and more than two hours logged
+        </li>
+        <li><span class="text-gray-500">-</span> - Not scheduled to work</li>
       </ul>
     </div>
   </div>
@@ -119,6 +173,7 @@ export default class App extends Vue {
     image: "",
     daysWorked: [],
     tech: false,
+    color: "#FFFFFF",
     weekReports: [
       {
         date: "",
@@ -213,21 +268,21 @@ export default class App extends Vue {
 
     const formatDay = (report: WeekReport, day: string) => {
       if (!this.currentStaff.daysWorked.includes(day)) {
-        return '<span class="trs-days-off">-</span>'; // Display grey '0' for days not worked
+        return '<span class="text-gray-500">-</span>'; // Display grey '-' for days not worked
       }
 
       // Show '✗' if no entry exists
       if (!report.hasEntry) {
-        return '<span class="trs-days">✗</span>';
+        return '<span class="text-red-500 font-bold underline">✗</span>'; // Red '✗' for no entry
       }
 
       // Show circle if less than two hours
       if (report.lessThanTwoHours) {
-        return '<span class="trs-days-circle">○</span>'; // Display circle emoji if less than 2 hours
+        return '<span class="text-orange-500 font-bold underline">○</span>'; // Orange circle if less than two hours
       }
 
       // Show tick if entry exists and more than two hours
-      return '<span class="trs-days-tick">✓</span>';
+      return '<span class="text-green-500 font-bold underline">✓</span>'; // Green tick for more than two hours
     };
 
     const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -333,24 +388,49 @@ export default class App extends Vue {
     sound.play();
   }
   allFlash(): void {
-    this.scrollToStaff();
     this.bgSound.loop = true;
     this.bgSound.play();
-    this.checkedStaff.forEach(
-      (staffMember: Staff, idx: number, array: Staff[]) => {
-        setTimeout(() => {
-          staffMember.flash = true;
-          if (idx === array.length - 1) {
-            setTimeout(() => {
-              this.removeFlashClass();
-              this.bgSound.pause();
-              this.pickStaff();
-            }, this.FLASH_DELAY);
-          }
-        }, idx * this.FLASH_DELAY);
+
+    let index = 0;
+    const cycleInterval = 200; // Time in milliseconds for cycling through each staff
+    const totalCycles = 1; // Number of times to cycle through the entire list before stopping
+    let cycleCount = 0;
+
+    // Interval to go through each staff member in the checkedStaff array
+    const interval = setInterval(() => {
+      // Reset flash for all staff
+      this.checkedStaff.forEach((staffMember) => {
+        staffMember.flash = false;
+      });
+
+      // Set flash for the current staff member
+      console.log("Flashing:", this.checkedStaff[index].name); // Add this line
+      this.checkedStaff[index].flash = true;
+
+      // Move to the next staff member
+      index = (index + 1) % this.checkedStaff.length;
+
+      // Check if we have cycled through enough times
+      if (index === 0) {
+        cycleCount++;
       }
-    );
+
+      // Stop the cycling after a certain number of cycles
+      if (cycleCount >= totalCycles) {
+        clearInterval(interval);
+
+        // Pick the final staff member to land on
+        this.pickStaff();
+
+        // Remove the flashing effect and stop the background sound
+        setTimeout(() => {
+          this.removeFlashClass();
+          this.bgSound.pause();
+        }, this.FLASH_DELAY);
+      }
+    }, cycleInterval);
   }
+
   removeFlashClass(): void {
     this.checkedStaff.forEach((staffMember: Staff) => {
       staffMember.flash = false;
@@ -359,7 +439,10 @@ export default class App extends Vue {
   async getStaff(): Promise<void> {
     try {
       const staffResponse = await fetchStaffAPI.fetchStaff();
-      this.allStaff = staffResponse;
+      this.allStaff = staffResponse.map((staff) => ({
+        ...staff,
+        color: this.randomColour(), // Generate color once for each staff member
+      }));
       await this.addWeekReports();
       this.filterStaffByDay();
       this.filterTechStaff();
@@ -413,9 +496,19 @@ export default class App extends Vue {
     });
   }
 
-  randomColor(): string {
-    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  randomColour(): string {
+    const getBalancedColour = () => {
+      // Generate R, G, B values that ensure the color is light but not too light
+      const r = Math.floor(150 + Math.random() * 85); // R between 150-235
+      const g = Math.floor(150 + Math.random() * 85); // G between 150-235
+      const b = Math.floor(150 + Math.random() * 85); // B between 150-235
+
+      return `rgb(${r}, ${g}, ${b})`;
+    };
+
+    return getBalancedColour();
   }
+
   scrollToStaff(): void {
     const selectedStaffElement = this.$refs.staff as HTMLElement;
     if (selectedStaffElement) {
@@ -453,7 +546,3 @@ export default class App extends Vue {
   }
 }
 </script>
-
-<style scoped>
-@import "@/main.css";
-</style>

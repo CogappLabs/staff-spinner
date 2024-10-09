@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "MajorMonoDisplay";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/MajorMonoDisplay-Regular.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "star jedi";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/star_jedi/Starjedi.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "star jedi outline";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/star_jedi/Starjhol.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "pokemon solid";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/pokemon/Pokemon Solid.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "pokemon hollow";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/pokemon/Pokemon Hollow.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "pokemon interface";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/pokemon_classic/Pokemon Classic.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "CF Halloween";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/CFHalloween-Regular.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "OpenDyslexic";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/src/fonts/opendyslexic/OpenDyslexic-Regular.woff2")
+      format("woff2");
+  }
+
+  @font-face {
+    font-family: "OpenDyslexic";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/src/fonts/opendyslexic/OpenDyslexic-Italic.woff2")
+      format("woff2");
+  }
+
+  @font-face {
+    font-family: "OpenDyslexic";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/src/fonts/opendyslexic/OpenDyslexic-Bold.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "OpenDyslexic";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/src/fonts/opendyslexic/OpenDyslexic-Bold-Italic.woff2")
+      format("woff2");
+  }
+}
