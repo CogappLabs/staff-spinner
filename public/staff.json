@@ -133,7 +133,7 @@
         "flash": false,
         "image": "https://ca.slack-edge.com/T045774MG-U02KE3ZM5LY-6a3476e26248-512",
         "sound": "Nitin.mp3",
-        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "tech": true
       },
       {
