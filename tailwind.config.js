@@ -12,6 +12,7 @@ module.exports = {
         pokemonInterface: ['"pokemon interface"', "sans-serif"], // Pokemon Interface
         halloween: ['"CF Halloween"', "sans-serif"], // CF Halloween
         dyslexic: ['"OpenDyslexic"', "sans-serif"],
+        legible: ['"Atkinson-Hyperlegible"', "sans-serif"],
       },
       animation: {
         "custom-pulse": "pulse-custom 1s infinite",

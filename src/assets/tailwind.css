@@ -97,4 +97,39 @@
     src: url("/src/fonts/opendyslexic/OpenDyslexic-Bold-Italic.woff2")
       format("woff2");
   }
+  @font-face {
+    font-family: "Atkinson-Hyperlegible";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/src/fonts/Atkinson-Hyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2")
+      format("woff2");
+  }
+
+  @font-face {
+    font-family: "Atkinson-Hyperlegible";
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/src/fonts/Atkinson-Hyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2")
+      format("woff2");
+  }
+
+  @font-face {
+    font-family: "Atkinson-Hyperlegible";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/src/fonts/Atkinson-Hyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2")
+      format("woff2");
+  }
+
+  @font-face {
+    font-family: "Atkinson-Hyperlegible";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/src/fonts/Atkinson-Hyperlegible/Atkinson-Hyperlegible-BoldItalic-102a.woff2")
+      format("woff2");
+  }
 }

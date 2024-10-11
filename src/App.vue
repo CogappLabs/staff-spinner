@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="!apiLoading"
-    class="min-h-screen p-4 font-dyslexic"
+    class="min-h-screen p-4 font-legible"
     :class="dayAttributes.class"
   >
     <h1 :title="dayAttributes.title" class="text-4xl font-bold">
@@ -37,7 +37,7 @@
         </h2>
         <button
           @click="allFlash"
-          class="bg-white text-black border border-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors duration-200 mt-6"
+          class="bg-white text-black border border-black py-2 px-4 rounded hover:bg-black hover:text-white transition-colors duration-200 mt-2"
         >
           <span>{{ dayAttributes.selectedStaffButton }}</span>
         </button>
@@ -61,7 +61,7 @@
           {{ dayAttributes.staffHeader }}
         </h2>
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mt-6"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mt-2"
         >
           <div
             v-for="(staff, index) in checkedStaff"
@@ -445,7 +445,7 @@ export default class App extends Vue {
       const staffResponse = await fetchStaffAPI.fetchStaff();
       this.allStaff = staffResponse.map((staff) => ({
         ...staff,
-        color: this.randomColour(), // Generate color once for each staff member
+        color: staff.color || this.randomColour(),
       }));
       await this.addWeekReports();
       this.filterStaffByDay();
@@ -478,9 +478,28 @@ export default class App extends Vue {
   }
 
   filterStaffByDay(): void {
-    this.checkedStaff = this.allStaff.filter((staffMember) =>
-      staffMember.daysWorked.includes(this.dayString)
-    );
+    const today = new Date();
+    const isFriday = today.getDay() === 5; // 5 represents Friday in getDay()
+
+    // Helper function to check if it's Nitin's working Friday
+    const isNitinWorkingThisFriday = (): boolean => {
+      const startOfYear = new Date(today.getFullYear(), 0, 1); // Jan 1st
+      const weekNumber = Math.ceil(
+        ((today.getTime() - startOfYear.getTime()) / 86400000 +
+          startOfYear.getDay() +
+          1) /
+          7
+      );
+
+      return weekNumber % 2 === 1; // Assuming Nitin works on odd-numbered weeks
+    };
+
+    this.checkedStaff = this.allStaff.filter((staffMember) => {
+      if (staffMember.name === "Nitin" && isFriday) {
+        return isNitinWorkingThisFriday(); // Only include Nitin if it's his working Friday
+      }
+      return staffMember.daysWorked.includes(this.dayString);
+    });
   }
 
   filterTechStaff(): void {

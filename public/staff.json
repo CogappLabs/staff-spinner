@@ -35,7 +35,8 @@
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1591020543497-BBTKJDIQKCKNDCV782CM/emily3edit.jpg?format=500w",
         "sound": "Emily.mp3",
         "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "tech": true
+        "tech": true,
+        "color": "#e9d4fa"
       },
       {
         "name": "Grant",
