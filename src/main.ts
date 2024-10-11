@@ -1,4 +1,5 @@
 import "@/assets/tailwind.css";
+import "@/assets/whimsy.css";
 import Vue from "vue";
 import App from "@/App.vue";
 

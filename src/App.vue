@@ -238,11 +238,7 @@ export default class App extends Vue {
         slackBgSound: "/sounds/pokemon-intro.mp3",
         selectedStaffHeader: "Will you switch your Pokémon?",
         currentStaffMessage:
-          "Ash sent out " +
-          this.currentStaffPokemonName.toUpperCase() +
-          " (" +
-          this.currentStaff.name.toUpperCase() +
-          ")",
+          "Ash sent out " + this.currentStaffPokemonName.toUpperCase(),
         currentStaffImage: this.currentStaffPokemonImage,
         staffHeader: "Pokémon Team",
         selectedStaffButton: "YES",

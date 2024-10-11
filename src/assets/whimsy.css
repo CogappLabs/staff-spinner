@@ -1,0 +1,44 @@
+/* Whimsy flags */
+.starwars {
+  font-family: "star jedi";
+  letter-spacing: 0.1rem;
+  background-color: #000;
+  color: #ffe81f;
+  background-image: url("assets/star-wars-stars.jpg");
+}
+
+.halloween {
+  background-color: black;
+  color: orange;
+}
+
+.pokemon {
+  font-family: "pokemon interface";
+  background-color: #9bbc0f;
+  color: #0f380f;
+}
+
+/* @font-face declarations */
+@font-face {
+  font-family: "star jedi";
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: url("fonts/star_jedi/Starjedi.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "CF Halloween";
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: url("fonts/CFHalloween-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "pokemon interface";
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: url("fonts/pokemon/Pokemon Classic.ttf") format("truetype");
+}
