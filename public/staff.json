@@ -102,6 +102,15 @@
         "tech": false
       },
       {
+        "name": "Louise",
+        "initials": "LC",
+        "flash": false,
+        "image": "https://cogapp-website-files-prod.s3.eu-west-2.amazonaws.com/Team-photos/_432x432_crop_center-center_none/louisec.jpg",
+        "sound": "Louise.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday"],
+        "tech": false
+      },
+      {
         "name": "Matt",
         "initials": "MC",
         "flash": false,
