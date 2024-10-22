@@ -13,7 +13,7 @@ export interface Staff {
 export interface WeekReport {
   date: string;
   hasEntry: boolean;
-  lessThanTwoHours: boolean;
+  lessThanFullDay: boolean;
 }
 
 export interface WeekReportsData {

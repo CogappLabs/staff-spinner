@@ -178,7 +178,7 @@ export default class App extends Vue {
       {
         date: "",
         hasEntry: false,
-        lessThanTwoHours: false,
+        lessThanFullDay: false,
       },
     ],
   };
@@ -273,7 +273,7 @@ export default class App extends Vue {
       }
 
       // Show circle if less than two hours
-      if (report.lessThanTwoHours) {
+      if (report.lessThanFullDay) {
         return '<span class="text-orange-500 font-bold underline">○</span>'; // Orange circle if less than two hours
       }
 
