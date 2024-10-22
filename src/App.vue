@@ -142,7 +142,7 @@
         </li>
         <li>
           <span class="text-orange-500 font-bold underline">○</span> - Less than
-          two hours of time logged
+          four hours of time logged
         </li>
         <li>
           <span class="text-green-500 font-bold underline">✓</span> - Time entry
