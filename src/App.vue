@@ -146,7 +146,7 @@
         </li>
         <li>
           <span class="text-green-500 font-bold underline">✓</span> - Time entry
-          exists and more than two hours logged
+          exists and more than four hours logged
         </li>
         <li><span class="text-gray-500">-</span> - Not scheduled to work</li>
       </ul>
