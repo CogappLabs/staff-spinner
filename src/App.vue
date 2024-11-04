@@ -161,6 +161,7 @@ import { Component, Vue } from "vue-property-decorator";
 import fetchStaffAPI from "@/api";
 import { Staff, WeekReport, WeekReportsData } from "@/interfaces";
 import PokeAPI from "pokeapi-typescript";
+import { Fireworks } from "fireworks-js";
 
 @Component
 export default class App extends Vue {
@@ -249,6 +250,14 @@ export default class App extends Vue {
         ...defaultAttributes,
         class: "xmas",
         bgSound: "/sounds/xmas.mp3",
+      };
+    }
+    if (this.isTodayBonfireNight) {
+      return {
+        ...defaultAttributes,
+        class: "bonfire",
+        header: "Bonfire Night",
+        bgSound: "/sounds/bonfire.mp3",
       };
     }
     return defaultAttributes;
@@ -349,6 +358,14 @@ export default class App extends Vue {
     return today.getMonth() === 9 && today.getDate() === 31;
   }
 
+  get isTodayBonfireNight(): boolean {
+    if (this.whimsyQueryParam === "bonfire") {
+      return true;
+    }
+    const today = new Date();
+    return today.getMonth() === 10 && today.getDate() === 5;
+  }
+
   get whimsyQueryParam(): string | null {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get("whimsy");
@@ -372,7 +389,42 @@ export default class App extends Vue {
     this.checkedStaff = filteredStaff;
     this.scrollToSelectedStaff();
     this.playTheme(randomStaff);
+
+    if (this.isTodayBonfireNight) {
+      const fireworks = new Fireworks({
+        target: this.$el,
+        hue: { min: 0, max: 360 },
+        delay: { min: 15, max: 30 },
+        rocketsPoint: { min: 50, max: 50 },
+        speed: 2,
+        acceleration: 1.05,
+        friction: 0.95,
+        gravity: 1.5,
+        particles: 50,
+        trace: 3,
+        explosion: 5,
+        boundaries: {
+          x: 50,
+          y: 50,
+          width: this.$el.clientWidth,
+          height: this.$el.clientHeight,
+        },
+        sound: {
+          enable: true,
+          list: [
+            "explosion0.mp3",
+            "explosion1.mp3",
+            "explosion2.mp3",
+          ],
+          min: 4,
+          max: 8,
+        },
+      });
+      fireworks.start();
+      setTimeout(() => fireworks.stop(), 5000);
+    }
   }
+
   restart(): void {
     this.checkedStaff = this.allStaff;
     this.currentStaff = this.blankStaff;
