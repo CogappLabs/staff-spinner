@@ -161,6 +161,7 @@ import { Component, Vue } from "vue-property-decorator";
 import fetchStaffAPI from "@/api";
 import { Staff, WeekReport, WeekReportsData } from "@/interfaces";
 import PokeAPI from "pokeapi-typescript";
+import { Fireworks } from "fireworks-js";
 
 @Component
 export default class App extends Vue {
@@ -388,7 +389,42 @@ export default class App extends Vue {
     this.checkedStaff = filteredStaff;
     this.scrollToSelectedStaff();
     this.playTheme(randomStaff);
+
+    if (this.isTodayBonfireNight) {
+      const fireworks = new Fireworks({
+        target: this.$el,
+        hue: { min: 0, max: 360 },
+        delay: { min: 15, max: 30 },
+        rocketsPoint: { min: 50, max: 50 },
+        speed: 2,
+        acceleration: 1.05,
+        friction: 0.95,
+        gravity: 1.5,
+        particles: 50,
+        trace: 3,
+        explosion: 5,
+        boundaries: {
+          x: 50,
+          y: 50,
+          width: this.$el.clientWidth,
+          height: this.$el.clientHeight,
+        },
+        sound: {
+          enable: true,
+          list: [
+            "explosion0.mp3",
+            "explosion1.mp3",
+            "explosion2.mp3",
+          ],
+          min: 4,
+          max: 8,
+        },
+      });
+      fireworks.start();
+      setTimeout(() => fireworks.stop(), 5000);
+    }
   }
+
   restart(): void {
     this.checkedStaff = this.allStaff;
     this.currentStaff = this.blankStaff;
