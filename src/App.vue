@@ -251,6 +251,14 @@ export default class App extends Vue {
         bgSound: "/sounds/xmas.mp3",
       };
     }
+    if (this.isTodayBonfireNight) {
+      return {
+        ...defaultAttributes,
+        class: "bonfire",
+        header: "Bonfire Night",
+        bgSound: "/sounds/bonfire.mp3",
+      };
+    }
     return defaultAttributes;
   }
 
@@ -347,6 +355,14 @@ export default class App extends Vue {
     }
     const today = new Date();
     return today.getMonth() === 9 && today.getDate() === 31;
+  }
+
+  get isTodayBonfireNight(): boolean {
+    if (this.whimsyQueryParam === "bonfire") {
+      return true;
+    }
+    const today = new Date();
+    return today.getMonth() === 10 && today.getDate() === 5;
   }
 
   get whimsyQueryParam(): string | null {

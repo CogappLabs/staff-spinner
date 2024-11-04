@@ -18,6 +18,11 @@
   color: #0f380f;
 }
 
+.bonfire {
+  background-color: #ff4500;
+  color: #ffffff;
+}
+
 /* @font-face declarations */
 @font-face {
   font-family: "star jedi";
