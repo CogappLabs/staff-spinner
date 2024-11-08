@@ -111,10 +111,19 @@
         "tech": false
       },
       {
-        "name": "Matt",
+        "name": "MattC",
         "initials": "MC",
         "flash": false,
         "image": "https://images.squarespace-cdn.com/content/v1/58b9484a59cc6856f3c58cf3/1591012058042-HRMWKIU1NWNXMURG2SLV/IMG_0399.jpg?format=500w",
+        "sound": "Matt.mp3",
+        "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "tech": true
+      },
+      {
+        "name": "MattM",
+        "initials": "MM",
+        "flash": false,
+        "image": "https://media.licdn.com/dms/image/v2/D4E03AQGKIDkMG6SgGQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1730119118645?e=1736380800&v=beta&t=AYGSn7OduStYvlJ4aPj2IiY4avKgijN3rBq-OTAx0ok",
         "sound": "Matt.mp3",
         "daysWorked": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "tech": true
